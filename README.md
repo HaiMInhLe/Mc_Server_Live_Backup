@@ -36,5 +36,5 @@ This tool backs up a Minecraft server live with retries, logging and snapshot sa
 ## Notes
 
 -   The program is developed by a beginner. If there are any obvious mistakes please kindly point it out.
--   The program is developed for UNIX system only. If window users want to use this, please modify the source code accordingly. But come on, who host a server in windows anyway.
+-   The program is developed for UNIX system only. If windows users want to use this, please modify the source code accordingly. But come on, who host a server in windows anyway.
 
