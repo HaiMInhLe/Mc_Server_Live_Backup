@@ -1,28 +1,28 @@
 
 # Table of Contents
 
-1.  [mc<sub>backup</sub><sub>tool</sub>](#orge202ae7)
-    1.  [Useage](#org406d5df)
-    2.  [Dependencies](#org645ecc4)
-    3.  [Notes](#org3ac3314)
+1.  [mc-backup-tool](#org1b968dc)
+    1.  [Useage](#org5a62976)
+    2.  [Dependencies](#orgbaf6305)
+    3.  [Notes](#org18ff3aa)
 
 
 
-<a id="orge202ae7"></a>
+<a id="org1b968dc"></a>
 
-# mc<sub>backup</sub><sub>tool</sub>
+# mc-backup-tool
 
 This tool backs up a Minecraft server live with retries, logging and snapshot safety.
 
 
-<a id="org406d5df"></a>
+<a id="org5a62976"></a>
 
 ## Useage
 
     python3 src/mcserver-backup.py /path/to/server_dir /path/to/backkups
 
 
-<a id="org645ecc4"></a>
+<a id="orgbaf6305"></a>
 
 ## Dependencies
 
@@ -31,11 +31,10 @@ This tool backs up a Minecraft server live with retries, logging and snapshot sa
 -   Cron or systemd timer or any thing that can run this script in a fix interval
 
 
-<a id="org3ac3314"></a>
+<a id="org18ff3aa"></a>
 
 ## Notes
 
 -   The program is developed by a beginner. If there are any obvious mistakes please kindly point it out.
--   Some features that will be added in later on include multiple compression level of format.
 -   The program is developed for UNIX system only. If window users want to use this, please modify the source code accordingly. But come on, who host a server in windows anyway.
 
