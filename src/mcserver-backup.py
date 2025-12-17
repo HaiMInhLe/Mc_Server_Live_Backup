@@ -1,4 +1,3 @@
-#!/usr/bin/python3
 from pathlib import Path
 import argparse
 from datetime import datetime
@@ -41,6 +40,7 @@ def copy_world(src):
             copytree(src, dst)
             return dst
         except Exception as e:
+            # Remember to add rmtree() here for deleting depricate attempt
             last_error = e
             # Will use a dedicated log module later on
             print("Attempt fail, retry")
