@@ -3,8 +3,9 @@ import argparse
 from datetime import datetime
 from subprocess import run
 import time
-from shutil import copytree, rmtree, Error
+from shutil import copytree, rmtree 
 import random
+from uuid import uuid4
 
 # main logic of the code 
 def main():
@@ -30,17 +31,22 @@ def pause_server():
     time.sleep(120)
 
 def copy_world(src):
-    # Use random for now, but will move to an ID base system later on, as random format is confusing and ugly
-    random_num = random.random()
-    dst = Path(f"/tmp/mcServerCopyTemp{random_num}/") 
     last_error = None
     
     for attempt in range(3):
+
+        # Create a tmp dierctory using an unique ID each time the code retry or run
+        snapshot_id = uuid4().hex
+        dst = Path(f"/tmp/mcServerCopyTemp{snapshot_id}/") 
         try:
             copytree(src, dst)
             return dst
+
+        # Raise an exception if copytree fail, and follow up with clean up and retry
         except Exception as e:
-            # Remember to add rmtree() here for deleting depricate attempt
+            # Check if the directory dst exist or not. If yes, then delete it here
+            if dst.exists():
+                rmtree(dst)
             last_error = e
             # Will use a dedicated log module later on
             print("Attempt fail, retry")
@@ -51,7 +57,7 @@ def resume_server():
     run(["tmux", "send-keys", "-t", "MC", "save-on", "Enter"])
 
 def compress_backup(src, dst):
-    run(["tar", "-cf", "--use-compress-program = 'pixz -9e'"])
+    run(["tar", "-cf", "--use-compress-program = 'pixz -9e'", f"--exclude='{dst}/plugins/*.jar'", f"--exclude='{dst}/logs'", f"--exclude='{dst}/cache'", f"--exclude='{dst}/libraries'"])
 
 def cleanup_temp(dst):
     rmtree(dst) 
