@@ -4,7 +4,6 @@ from datetime import datetime
 from subprocess import run
 import time
 from shutil import copytree, rmtree 
-import random
 from uuid import uuid4
 
 # main logic of the code 
@@ -26,7 +25,10 @@ def main():
     print(backup_filename)
 
 def pause_server():
+    # Tell the minecraft to stop writing to disk
     run(["tmux", "send-keys", "-t", "MC", "save-off", "Enter"])
+
+    # Tell the minecraft server to finish saving the content to disk
     run(["tmux", "send-keys", "-t", "MC", "save-all", "Enter"])
     time.sleep(120)
 
@@ -56,6 +58,7 @@ def copy_world(src):
 def resume_server():
     run(["tmux", "send-keys", "-t", "MC", "save-on", "Enter"])
 
+# It is a live backup so I think I will remove the compression program thing, as it will use all the available threads and leave none for the minecraft server. One or two threads for this should be sufficient
 def compress_backup(src, dst):
     run(["tar", "-cf", "--use-compress-program = 'pixz -9e'", f"--exclude='{dst}/plugins/*.jar'", f"--exclude='{dst}/logs'", f"--exclude='{dst}/cache'", f"--exclude='{dst}/libraries'"])
 
