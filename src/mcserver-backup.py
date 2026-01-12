@@ -22,7 +22,7 @@ def main():
     # Add in time and date 
     time = datetime.now().strftime("%Y-%m-%d_%H%M%S")
     backup_filename = dest / f"mc_backup_{time}.tar.xz"
-    print(backup_filename)
+    # print(backup_filename)
 
 def pause_server():
     # Tell the minecraft to stop writing to disk
@@ -60,7 +60,7 @@ def resume_server():
 
 # It is a live backup so I think I will remove the compression program thing, as it will use all the available threads and leave none for the minecraft server. One or two threads for this should be sufficient
 def compress_backup(src, dst):
-    run(["tar", "-cf", "--use-compress-program = 'pixz -9e'", f"--exclude='{dst}/plugins/*.jar'", f"--exclude='{dst}/logs'", f"--exclude='{dst}/cache'", f"--exclude='{dst}/libraries'"])
+    run(["tar", "-cJf", f"{dst}/"
 
 def cleanup_temp(dst):
     rmtree(dst) 
