@@ -20,15 +20,15 @@ def main():
     dest = Path(args.destination).expanduser().resolve() 
 
     # Add in time and date 
-    time = datetime.now().strftime("%Y-%m-%d_%H%M%S")
-    backup_filename = dest / f"mc_backup_{time}.tar.xz"
+    current_time = datetime.now().strftime("%Y-%m-%d_%H%M%S")
+    backup_filename = dest / f"mc_backup_{current_time}.tar.xz"
     # print(backup_filename)
 
 def pause_server():
-    # Tell the minecraft to stop writing to disk
+    # Tell minecraft to stop writing to disk
     run(["tmux", "send-keys", "-t", "MC", "save-off", "Enter"])
 
-    # Tell the minecraft server to finish saving the content to disk
+    # Tell minecraft to finish saving the content to disk
     run(["tmux", "send-keys", "-t", "MC", "save-all", "Enter"])
     time.sleep(120)
 
@@ -59,8 +59,9 @@ def resume_server():
     run(["tmux", "send-keys", "-t", "MC", "save-on", "Enter"])
 
 # It is a live backup so I think I will remove the compression program thing, as it will use all the available threads and leave none for the minecraft server. One or two threads for this should be sufficient
+# Need to work on renaming variables dst so it means different thing in differnt functions
 def compress_backup(src, dst):
-    run(["tar", "-cJf", f"{dst}/"
+    run(["tar", "-cJf", dst, "--exclude=./logs", "--exclude=./cache", "--exclude=./libraries", f"--directory={src}"])
 
 def cleanup_temp(dst):
     rmtree(dst) 
