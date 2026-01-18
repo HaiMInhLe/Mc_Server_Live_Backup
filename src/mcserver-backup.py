@@ -61,13 +61,14 @@ def resume_server():
     run(["tmux", "send-keys", "-t", "MC", "save-on", "Enter"])
 
 # It is a live backup so I think I will remove the compression program thing, as it will use all the available threads and leave none for the minecraft server. One or two threads for this should be sufficient
-# Need to work on renaming variables dst so it means different thing in different functions
 def compress_backup(compress_src, compress_dst):
     run(["tar", "-cJf", compress_dst, "--exclude=./logs", "--exclude=./cache", "--exclude=./libraries", f"--directory={compress_src}"])
 
 def cleanup_temp(temp_dst):
     rmtree(temp_dst) 
 
+def rotation():
+    pass
 
 
 # Execute the code 
