@@ -23,7 +23,12 @@ def main():
     current_time = datetime.now().strftime("%Y-%m-%d_%H%M%S")
     backup_filename = dest / f"mc_backup_{current_time}.tar.xz"
     
-    copy_world(source)
+    pause_server()
+    copy_dst = copy_world(source)
+    resume_server()
+    compress_backup(copy_dst, dest)
+    cleanup_temp(copy_dst)
+
 
 def pause_server():
     # Tell minecraft to stop writing to disk
