@@ -6,7 +6,7 @@ import time
 from shutil import copytree, rmtree 
 from uuid import uuid4
 
-# main logic of the code 
+# Main logic of the code 
 def main():
     # Parse the argument from the command line
     parser = argparse.ArgumentParser(prog = 'backup_script', description='* A script that compress using xz -9e and backup the minecraft server directory, run periodically using cron or systemd timer\n* Example usage: python3 mcserver-backup.py ~/server_dir /mnt/backup_dir')
