@@ -12,7 +12,7 @@
 
 # mc-backup-tool
 
-This tool backs up a Minecraft server live with retries, logging and snapshot safety.
+This tool backs up a Minecraft server live with retries, logging and snapshot safety. However, this tool is meant to be used as a monthly backups, not daily. For daily purposes, a separate script using hardlinks are being developed for daily backup purpose. 
 
 
 <a id="org5a62976"></a>
@@ -27,7 +27,6 @@ This tool backs up a Minecraft server live with retries, logging and snapshot sa
 ## Dependencies
 
 -   Python 3.10+ (standard libraries only)
--   pixz (for compression)
 -   Cron or systemd timer or any thing that can run this script in a fix interval
 
 
@@ -37,4 +36,5 @@ This tool backs up a Minecraft server live with retries, logging and snapshot sa
 
 -   The program is developed by a beginner. If there are any obvious mistakes please kindly point it out.
 -   The program is developed for UNIX system only. If windows users want to use this, please modify the source code accordingly. But come on, who host a server in windows anyway.
+-   The main logic of the backup process is self-explanatory once you read the code btw. 
 
