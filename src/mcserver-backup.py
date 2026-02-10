@@ -1,3 +1,4 @@
+from os import rmdir
 from pathlib import Path
 import argparse
 from datetime import datetime
@@ -27,8 +28,7 @@ def main():
     copy_dst = copy_world(source)
     # resume_server()
     compress_backup(copy_dst, backup_filename)
-    cleanup_temp(copy_dst)
-
+    rmtree(copy_dst) 
 
 def pause_server():
     # Tell minecraft to stop writing to disk
