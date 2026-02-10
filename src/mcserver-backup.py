@@ -23,10 +23,10 @@ def main():
     current_time = datetime.now().strftime("%Y-%m-%d_%H%M%S")
     backup_filename = dest / f"mc_backup_{current_time}.tar.xz"
     
-    pause_server()
+    # pause_server()
     copy_dst = copy_world(source)
-    resume_server()
-    compress_backup(copy_dst, dest)
+    # resume_server()
+    compress_backup(copy_dst, backup_filename)
     cleanup_temp(copy_dst)
 
 
@@ -66,8 +66,9 @@ def resume_server():
     run(["tmux", "send-keys", "-t", "MC", "save-on", "Enter"])
 
 # It is a live backup so I think I will remove the compression program thing, as it will use all the available threads and leave none for the minecraft server. One or two threads for this should be sufficient
+# TESTED (very basic test case, but it works), but if you can come up with some more test cases, please test this function more thoroughly
 def compress_backup(compress_src, compress_dst):
-    run(["tar", "-cJf", compress_dst, "--exclude=./logs", "--exclude=./cache", "--exclude=./libraries", f"--directory={compress_src}"])
+    run(["tar", "-cJf", compress_dst, "--exclude=./logs", "--exclude=./cache", "--exclude=./libraries", f"--directory={compress_src}", "."])
 
 def cleanup_temp(temp_dst):
     rmtree(temp_dst) 
@@ -78,4 +79,4 @@ def rotation():
 
 # Execute the code 
 if __name__=="__main__":
-    main()
+    main() 
