@@ -70,6 +70,7 @@ def resume_server():
 def compress_backup(compress_src, compress_dst):
     run(["tar", "-cJf", compress_dst, "--exclude=./logs", "--exclude=./cache", "--exclude=./libraries", f"--directory={compress_src}", "."])
 
+# TESTED
 def cleanup_temp(temp_dst):
     rmtree(temp_dst) 
 
